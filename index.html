@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflection Narrative on Data Privacy & Cybersecurity</title>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Space Grotesk", sans-serif;
+            background-image: url('download (1).gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            height: 100vh;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh; 
+            text-align: center;
+        }
+        
+        .container {
+            width: 60%; 
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            overflow-y: auto; /* Allow scrolling if content is too long */
+            max-height: 70vh; /* Limit the height of the container */
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        #navButtons {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="page1" class="container">
+            <h1>Reflection Narrative: Data Privacy & Cybersecurity - Part 1</h1>
+            <div id="reflection1"></div>
+        </div>
+        
+        <div id="page2" class="container" style="display: none;">
+            <h1>Reflection Narrative: Data Privacy & Cybersecurity - Part 2</h1>
+            <div id="reflection2"></div>
+        </div>
+    </div>
+    
+    <div id="navButtons">
+        <button id="prevButton" style="display: none;">Previous</button>
+        <button id="nextButton">Next</button>
+    </div>
+    
+    <py-script>
+        # Split essay content into two parts
+        essay_part1 = """Data Privacy is a process of handling individual personal information and ensuring that personal data is collected and protected. It is crucial in building trust between organizations and individuals, especially in our digital world. There are many advantages and disadvantages to data privacy. The advantages include building trust and confidence, enhancing security, improving data quality, and gaining a competitive advantage. However, disadvantages include reduced data availability and the complexity in implementation, which can require significant expertise and lead to confusion about compliance obligations.
+
+        Cyber Awareness is key to understanding and acknowledging online safety practices and the potential risks associated with digital technologies. Cyber criminals are individuals or groups engaging in illegal activities using computers, networks, or the internet, often for financial gain or data theft. They use techniques such as hacking, phishing, ransomware attacks, and denial-of-service attacks.
+
+        Cyber criminals can face various punishments, including:
+        - **Fines:** Monetary penalties imposed on guilty parties.
+        - **Prison Sentences:** Lengthy incarceration for serious offenses.
+        - **Probation:** Compliance with specific conditions post-sentence.
+        - **Restitution:** Compensation to victims for financial losses.
+        - **Community Service:** Sentences requiring community involvement.
+
+        **DATA PRIVACY ACT**
+        In the Philippines, the primary law is the Data Privacy Act of 2012 (Republic Act No. 10173), which protects individual personal information. Key aspects include:
+        1. **Purpose:** Protects personal information in both sectors.
+        2. **Key Provisions:** Establishes rights for data subjects and obligations for controllers.
+        3. **Consent:** Data collection and processing require consent.
+        4. **Rights of Data Subjects:** Access, correction, and deletion of data are granted.
+
+        The National Privacy Commission (NPC) monitors compliance, enforces the law, and promotes awareness about data privacy rights. Compliance with these regulations is essential for organizations managing personal information."""
+
+        essay_part2 = """Data Privacy is a process of handling individual personal information and ensuring its protection. Key advantages include building trust, enhancing security, and improving data quality. Disadvantages, such as reduced data availability and implementation complexity, can impact organizations.
+
+        Cyber Awareness is essential for online safety and understanding digital risks. Cyber criminals exploit vulnerabilities for financial gain, employing techniques like hacking and phishing.
+
+        Punishments for cyber crimes include fines, prison sentences, probation, restitution, and community service.
+
+        **DATA PRIVACY ACT**
+        The Data Privacy Act of 2012 in the Philippines establishes important regulations:
+        1. **Purpose:** Protects individual personal information.
+        2. **Key Provisions:** Rights for data subjects, obligations for controllers.
+        3. **Consent:** Required for data processing.
+        4. **Rights of Data Subjects:** Access, correction, deletion rights.
+
+        Compliance is crucial for organizations handling personal information. The NPC oversees adherence and promotes awareness about data privacy rights."""
+        
+        # Function to load content into the respective pages
+        def load_essay_pages():
+            reflection1 = Element("reflection1")
+            reflection2 = Element("reflection2")
+            # Write the content into the two div containers
+            reflection1.write(essay_part1)
+            reflection2.write(essay_part2)
+        
+        load_essay_pages()  # Load the essay content when the page is loaded
+        
+        # Function to navigate between the pages
+        def navigate_page(direction):
+            page1 = document.getElementById("page1")
+            page2 = document.getElementById("page2")
+            prev_button = document.getElementById("prevButton")
+            next_button = document.getElementById("nextButton")
+            # Check if navigating to the next page
+            if direction == "next":
+                page1.style.display = "none"
+                page2.style.display = "block"
+                prev_button.style.display = "inline-block"  # Show the Previous button
+                next_button.style.display = "none"  # Hide the Next button
+            else:
+                page1.style.display = "block"
+                page2.style.display = "none"
+                prev_button.style.display = "none"  # Hide the Previous button
+                next_button.style.display = "inline-block"  # Show the Next button
+        
+        # Attach event listeners to the buttons using JavaScript
+        def setup_buttons():
+            # Get the buttons
+            next_button = document.getElementById("nextButton")
+            prev_button = document.getElementById("prevButton")
+            # Define the event listener functions
+            next_button.onclick = lambda e: navigate_page("next")
+            prev_button.onclick = lambda e: navigate_page("prev")
+        
+        # Call the setup function to attach the event listeners
+        setup_buttons()
+    </py-script>
+</body>
+</html>
